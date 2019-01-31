@@ -1,0 +1,123 @@
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<div id="header">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a
+					class="navbar-brand"
+					href=""
+				> RENT CAR </a>
+			</div>
+			<div
+				class="collapse navbar-collapse"
+				id="myNavbar"
+			>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href=""> HOME </a> <span
+						class="glyphicon glyphicon-home"
+					></span></li>
+					<c:if test="${empty user}">
+						<li class="dropdown"><a
+							class="dropdown-toggle"
+							data-toggle="dropdown"
+							href=""
+						><fmt:message key='header.link.menu' /><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="controller?command=viewListCars"><fmt:message
+											key='header.link.cars'
+										/></a></li>
+								<li><a href="controller?command=viewSettings"><fmt:message
+											key='header.link.settings'
+										/></a></li>
+							</ul>
+					</c:if>
+					<c:if test="${not empty user}">
+						<c:choose>
+							<c:when test="${userRole.name == 'admin'}">
+								<li class="dropdown"><a
+									class="dropdown-toggle"
+									data-toggle="dropdown"
+									href=""
+								><fmt:message key='header.link.menu' /><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="controller?command=viewListClients"> <fmt:message
+													key='header.link.clients'
+												/>
+										</a></li>
+										<li><a href="controller?command=viewListManagers"> <fmt:message
+													key='header.link.managers'
+												/>
+										</a></li>
+										<li><a href="controller?command=viewListCars"><fmt:message
+													key='header.link.cars'
+												/></a></li>
+									</ul></li>
+								<li><a href="controller?command=viewSettings"><fmt:message
+											key='header.link.settings'
+										/></a></li>
+							</c:when>
+							<c:when test="${userRole.name == 'manager'}">
+								<li class="dropdown"><a
+									class="dropdown-toggle"
+									data-toggle="dropdown"
+									href=""
+								><fmt:message key='header.link.menu' /><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="controller?command=viewListOrders"> <fmt:message
+													key='header.link.orders'
+												/>
+										</a></li>
+										<li><a href="controller?command=viewSettings"><fmt:message
+													key='header.link.settings'
+												/></a></li>
+									</ul></li>
+							</c:when>
+							<c:when test="${userRole.name == 'client'}">
+								<li class="dropdown"><a
+									class="dropdown-toggle"
+									data-toggle="dropdown"
+									href=""
+								> <fmt:message key='header.link.menu' /><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="controller?command=viewListCars"><fmt:message
+													key='header.link.cars'
+												/></a></li>
+										<li><a href="controller?command=viewMyAccount"><fmt:message
+													key='header.link.my_account'
+												/> </a></li>
+										<li><a href="controller?command=viewSettings"><fmt:message
+													key='header.link.settings'
+												/></a></li>
+									</ul></li>
+							</c:when>
+						</c:choose>
+					</c:if>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<c:choose>
+						<c:when test="${empty user}">
+							<c:if test="${title ne 'registration'}">
+								<li><a href='controller?command=viewRegistration'><span
+										class="glyphicon glyphicon-user"
+									></span> <fmt:message key="header.link.create_account" /></a></li>
+							</c:if>
+							<c:if test="${title ne 'login'}">
+								<li><a href="controller?command=viewLogin"> <span
+										class="glyphicon glyphicon-log-in"
+									></span> <fmt:message key="header.link.login" /></a></li>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<li><a><fmt:message key="header.title.welcome" />,
+									${user.firstName} ${user.lastName} (${userRole.name})</a></li>
+							<li><a href="controller?command=logout"><span
+									class="glyphicon glyphicon-log-out"
+								></span> <fmt:message key='header.link.logout' /></a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
