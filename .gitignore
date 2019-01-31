@@ -1,0 +1,32 @@
+# Compiled class file
+
+*.class
+build/
+
+
+# Log file
+
+*.log
+
+
+# Package Files
+*.jar
+
+*.war
+
+*.ear
+
+*.zip
+*.tar.gz
+
+*.rar
+
+
+
+# Folder with Settings Files
+.settings/
+
+.classpath
+
+.project
+
